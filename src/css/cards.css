@@ -1,0 +1,121 @@
+/* ============================================================
+   CARDS — video grid, card shell, header, body, footer
+   ============================================================ */
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.video-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 1 / 1;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-card:hover {
+    background: var(--bg-surface);
+    border-color: var(--text-dim);
+}
+
+/* Card sections */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 0.6rem;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Video metadata inside cards */
+.video-index {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    background: #f1f5f9;
+    color: var(--text-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    min-width: 44px;
+    text-align: center;
+}
+
+.video-card.completed .video-index {
+    background: rgba(22, 163, 74, 0.1);
+    color: var(--success);
+}
+
+.video-title {
+    font-size: 0.9rem;
+    font-weight: 550;
+    color: var(--text-main);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.video-title:hover { color: var(--primary); }
+
+.video-card.completed .video-title {
+    color: var(--text-dim);
+    text-decoration: line-through;
+}
+
+.video-duration {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: #f1f5f9;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+/* Empty state */
+.empty-state {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+.empty-state p { margin-top: 1rem; font-size: 0.95rem; }
