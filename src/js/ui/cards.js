@@ -27,7 +27,7 @@ export function toggleVideo(id, isChecked) {
             if (isChecked) {
                 const date = new Date();
                 timeContainer.textContent = `Checked: ${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
-                timeContainer.style.display = 'block';
+                timeContainer.style.display = 'flex';
             } else {
                 timeContainer.textContent = '';
                 timeContainer.style.display = 'none';
@@ -112,7 +112,7 @@ export function renderVideos() {
                 <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer" class="video-title">
                     ${v.title}
                 </a>
-                <div class="completed-time-container" style="display: ${isCompleted && completedTimeStr ? 'block' : 'none'};">
+                <div class="completed-time-container" style="display: ${isCompleted && completedTimeStr ? 'flex' : 'none'};">
                     ${completedTimeStr}
                 </div>
             </div>
