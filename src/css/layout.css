@@ -1,32 +1,7 @@
 /* ============================================================
-   LAYOUT — header, dashboard, progress circle, stats,
+   LAYOUT — dashboard, progress circle, stats,
              controls, search, category tabs
    ============================================================ */
-
-/* Header */
-header {
-    text-align: left;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--black);
-    padding-bottom: 1.5rem;
-}
-
-.title-gradient {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--black);
-    margin-bottom: 0.5rem;
-}
-
-.subtitle {
-    font-size: 1rem;
-    color: var(--text-muted);
-    font-weight: 400;
-    max-width: 700px;
-}
 
 /* Dashboard Overview */
 .dashboard {
