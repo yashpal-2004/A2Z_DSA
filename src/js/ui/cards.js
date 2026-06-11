@@ -43,6 +43,7 @@ export function toggleLCSolved(videoId, btn) {
     const nowSolved = toggleLCSolvedState(videoId);
     btn.classList.toggle('lc-solved', nowSolved);
     btn.setAttribute('title', nowSolved ? 'LeetCode solved' : 'Mark LeetCode as solved');
+    updateProgress();
 }
 
 // Build and mount all video cards
