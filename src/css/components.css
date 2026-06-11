@@ -365,4 +365,61 @@
     border-bottom-color: var(--primary);
 }
 
+/* ============================================================
+   SIDEBAR LAYOUT & VERTICAL BADGES
+   ============================================================ */
+
+.app-body-layout {
+    display: grid;
+    grid-template-columns: 2.8fr 1.2fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .app-body-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.sidebar-area {
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar-area .badges-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sidebar-area .badge-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+}
+
+.sidebar-area .badge-icon-wrap {
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.sidebar-area .badge-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex-grow: 1;
+}
+
+.sidebar-area .badge-tier-pill {
+    align-self: flex-start;
+    margin-bottom: 0.15rem;
+}
+
+
 

@@ -111,10 +111,12 @@ export function renderBadges(pct) {
             <div class="badge-icon-wrap">
                 ${badge.icon}
             </div>
-            <span class="badge-tier-pill tier-${badge.tier}">${TIER_LABELS[badge.tier]}</span>
-            <div class="badge-title">${badge.title}</div>
-            <div class="badge-desc">${badge.desc}</div>
-            ${earned ? '<div class="badge-earned-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Earned</div>' : '<div class="badge-locked-mark">Locked</div>'}
+            <div class="badge-info">
+                <span class="badge-tier-pill tier-${badge.tier}">${TIER_LABELS[badge.tier]}</span>
+                <div class="badge-title">${badge.title}</div>
+                <div class="badge-desc">${badge.desc}</div>
+                ${earned ? '<div class="badge-earned-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Earned</div>' : '<div class="badge-locked-mark">Locked</div>'}
+            </div>
         `;
 
         grid.appendChild(card);
