@@ -358,6 +358,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     flex-shrink: 0;
+    margin-right: 0.35rem;
 }
 
 .heatmap-section {
