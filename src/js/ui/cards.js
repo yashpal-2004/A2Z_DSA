@@ -6,6 +6,7 @@ import {
     lcSolvedMap,
     activeCategory,
     searchQuery,
+    statusFilter,
     markVideoCompleted,
     toggleLCSolvedState,
 } from '../state.js';
@@ -54,7 +55,23 @@ export function renderVideos() {
             v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             v.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
             `L${v.index}`.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+
+        let matchesStatus = true;
+        const isCompleted = !!completedMap[v.id];
+        const isLCSolved  = !!lcSolvedMap[v.id];
+        const lcObject    = getLeetCodeNumber(v.title);
+
+        if (statusFilter === 'completed') {
+            matchesStatus = isCompleted;
+        } else if (statusFilter === 'incomplete') {
+            matchesStatus = !isCompleted;
+        } else if (statusFilter === 'leetcode-solved') {
+            matchesStatus = isLCSolved;
+        } else if (statusFilter === 'leetcode-unsolved') {
+            matchesStatus = !!lcObject && !isLCSolved;
+        }
+
+        return matchesCategory && matchesSearch && matchesStatus;
     });
 
     emptyState.style.display = filtered.length === 0 ? 'block' : 'none';

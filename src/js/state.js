@@ -8,9 +8,11 @@ export let completedMap = {};
 export let lcSolvedMap  = {};
 export let activeCategory = 'All';
 export let searchQuery    = '';
+export let statusFilter   = 'all'; // 'all', 'completed', 'incomplete', 'leetcode-solved', 'leetcode-unsolved'
 
 export function setActiveCategory(cat) { activeCategory = cat; }
 export function setSearchQuery(q)      { searchQuery = q; }
+export function setStatusFilter(f)      { statusFilter = f; }
 
 // ---- Firebase persistence ----
 
