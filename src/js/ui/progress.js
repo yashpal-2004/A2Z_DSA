@@ -1,6 +1,7 @@
 import { processedVideos } from '../utils/category.js';
-import { completedMap } from '../state.js';
+import { completedMap, lcSolvedMap } from '../state.js';
 import { formatDurationSummary } from '../utils/format.js';
+import { getLeetCodeNumber } from '../data/leetcode-map.js';
 import { renderBadges } from './badges.js';
 
 const statTotal         = document.getElementById('stat-total');
@@ -9,6 +10,10 @@ const statRemaining     = document.getElementById('stat-remaining');
 const progressPct       = document.getElementById('progress-percentage');
 const progressBar       = document.querySelector('.progress-circle .bar');
 const progressStatusLbl = document.getElementById('progress-status-lbl');
+
+const statTotalLC       = document.getElementById('stat-total-lc');
+const statSolvedLC      = document.getElementById('stat-solved-lc');
+const statRemainingLC   = document.getElementById('stat-remaining-lc');
 
 export function updateProgress() {
     const total           = processedVideos.length;
@@ -19,6 +24,12 @@ export function updateProgress() {
     const totalDuration = processedVideos.reduce((acc, v) => acc + (v.duration || 0), 0);
     const doneDuration  = completedVideos.reduce((acc, v) => acc + (v.duration || 0), 0);
     const leftDuration  = totalDuration - doneDuration;
+
+    // LeetCode stats
+    const lcVideos = processedVideos.filter(v => !!getLeetCodeNumber(v.title));
+    const totalLC = lcVideos.length;
+    const solvedLC = lcVideos.filter(v => !!lcSolvedMap[v.id]).length;
+    const remainingLC = totalLC - solvedLC;
 
     // Percentage is based on time, not video count — two decimal places
     const pct = totalDuration > 0
@@ -32,6 +43,10 @@ export function updateProgress() {
     document.getElementById('stat-total-duration').textContent = formatDurationSummary(totalDuration);
     document.getElementById('stat-done-duration').textContent  = formatDurationSummary(doneDuration);
     document.getElementById('stat-left-duration').textContent  = formatDurationSummary(leftDuration);
+
+    if (statTotalLC)     statTotalLC.textContent = totalLC;
+    if (statSolvedLC)    statSolvedLC.textContent = solvedLC;
+    if (statRemainingLC) statRemainingLC.textContent = remainingLC;
 
     progressPct.textContent = `${pct}%`;
 
