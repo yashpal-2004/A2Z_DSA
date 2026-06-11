@@ -16,37 +16,44 @@ export function renderTabs() {
         tab.addEventListener('click', () => {
             setActiveCategory(cat);
             renderTabs();
-            updateView();
+            renderVideos();
         });
         categoryTabs.appendChild(tab);
     });
-
-    // Activity Heatmap Tab
-    const actTab = document.createElement('button');
-    actTab.className = `tab ${activeCategory === 'Activity' ? 'active' : ''}`;
-    actTab.innerHTML = `Activity Heatmap`;
-    actTab.addEventListener('click', () => {
-        setActiveCategory('Activity');
-        renderTabs();
-        updateView();
-    });
-    categoryTabs.appendChild(actTab);
 }
 
-export function updateView() {
-    const heatmapSection = document.getElementById('heatmap-section');
+export function toggleView(view) {
+    const checklistControls = document.getElementById('checklist-controls');
+    const categoryTabsEl = document.getElementById('category-tabs');
     const videoGrid = document.getElementById('video-grid');
     const emptyState = document.getElementById('empty-state');
+    const heatmapSection = document.getElementById('heatmap-section');
 
-    if (activeCategory === 'Activity') {
+    const btnChecklist = document.getElementById('view-tab-checklist');
+    const btnHeatmap = document.getElementById('view-tab-heatmap');
+
+    if (view === 'heatmap') {
+        if (btnChecklist) btnChecklist.classList.remove('active');
+        if (btnHeatmap) btnHeatmap.classList.add('active');
+
+        if (checklistControls) checklistControls.style.display = 'none';
+        if (categoryTabsEl) categoryTabsEl.style.display = 'none';
         if (videoGrid) videoGrid.style.display = 'none';
         if (emptyState) emptyState.style.display = 'none';
         if (heatmapSection) heatmapSection.style.display = 'block';
+
         renderHeatmap();
     } else {
-        if (heatmapSection) heatmapSection.style.display = 'none';
+        if (btnChecklist) btnChecklist.classList.add('active');
+        if (btnHeatmap) btnHeatmap.classList.remove('active');
+
+        if (checklistControls) checklistControls.style.display = 'flex';
+        if (categoryTabsEl) categoryTabsEl.style.display = 'flex';
         if (videoGrid) videoGrid.style.display = 'grid';
+        if (heatmapSection) heatmapSection.style.display = 'none';
+
         renderVideos();
     }
 }
+
 
