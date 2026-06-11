@@ -72,36 +72,22 @@ if (btnHeatmap) {
     });
 }
 
-// Video Modal Close events
-const modalClose = document.getElementById('video-modal-close');
-const modalBackdrop = document.getElementById('video-modal-backdrop');
+// Video Page Close/Back event
+const videoPageBack = document.getElementById('video-page-back');
 
-if (modalClose) {
-    modalClose.addEventListener('click', () => {
-        const iframe = document.getElementById('video-iframe');
-        const modal = document.getElementById('video-modal');
-        if (modal && iframe) {
-            if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-                if (exitFS) exitFS.call(document);
-            }
+if (videoPageBack) {
+    videoPageBack.addEventListener('click', () => {
+        const mainContainer = document.querySelector('.container');
+        const videoPage     = document.getElementById('video-page');
+        const iframe        = document.getElementById('video-page-iframe');
+        
+        if (mainContainer && videoPage && iframe) {
             iframe.src = '';
-            modal.style.display = 'none';
-        }
-    });
-}
-
-if (modalBackdrop) {
-    modalBackdrop.addEventListener('click', () => {
-        const iframe = document.getElementById('video-iframe');
-        const modal = document.getElementById('video-modal');
-        if (modal && iframe) {
-            if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-                if (exitFS) exitFS.call(document);
-            }
-            iframe.src = '';
-            modal.style.display = 'none';
+            videoPage.style.display = 'none';
+            mainContainer.style.display = 'block';
+            
+            // Dispatch window resize event so that layout libraries (e.g. heatmap, grid) update correctly if needed
+            window.dispatchEvent(new Event('resize'));
         }
     });
 }
