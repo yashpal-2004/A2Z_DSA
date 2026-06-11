@@ -38,7 +38,7 @@ function persist() {
 
 export function markVideoCompleted(id, isCompleted) {
     if (isCompleted) {
-        completedMap[id] = true;
+        completedMap[id] = Date.now();
     } else {
         delete completedMap[id];
     }

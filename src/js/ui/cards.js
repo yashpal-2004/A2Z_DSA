@@ -19,7 +19,20 @@ export function toggleVideo(id, isChecked) {
     markVideoCompleted(id, isChecked);
 
     const card = document.querySelector(`[data-id="${id}"]`);
-    if (card) card.classList.toggle('completed', isChecked);
+    if (card) {
+        card.classList.toggle('completed', isChecked);
+        const timeContainer = card.querySelector('.completed-time-container');
+        if (timeContainer) {
+            if (isChecked) {
+                const date = new Date();
+                timeContainer.textContent = `Checked: ${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+                timeContainer.style.display = 'block';
+            } else {
+                timeContainer.textContent = '';
+                timeContainer.style.display = 'none';
+            }
+        }
+    }
 
     updateProgress();
 }
@@ -48,8 +61,15 @@ export function renderVideos() {
 
     filtered.forEach(v => {
         const isCompleted = !!completedMap[v.id];
+        const completedVal = completedMap[v.id];
         const lcObject    = getLeetCodeNumber(v.title);
         const isLCSolved  = !!lcSolvedMap[v.id];
+
+        let completedTimeStr = '';
+        if (isCompleted && completedVal) {
+            const date = new Date(completedVal);
+            completedTimeStr = `Checked: ${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+        }
 
         const lcSection = lcObject
             ? `<a href="https://leetcode.com/problems/${lcObject.slug}/" target="_blank" rel="noopener noreferrer" class="leetcode-tag" title="Open on LeetCode">${lcObject.num}</a>
@@ -74,6 +94,9 @@ export function renderVideos() {
                 <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer" class="video-title">
                     ${v.title}
                 </a>
+                <div class="completed-time-container" style="display: ${isCompleted && completedTimeStr ? 'block' : 'none'};">
+                    ${completedTimeStr}
+                </div>
             </div>
             <div class="card-footer">
                 <div class="footer-row">
