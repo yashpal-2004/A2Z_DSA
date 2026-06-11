@@ -3,14 +3,14 @@
                 LeetCode badge, LC solved check button
    ============================================================ */
 
-/* Custom checkbox */
+/* Circular Glass Checkbox */
 .checkbox-container {
     display: inline-block;
     position: relative;
-    padding-left: 20px;
     cursor: pointer;
     user-select: none;
-    min-height: 20px;
+    width: 28px;
+    height: 28px;
 }
 
 .checkbox-container input {
@@ -25,73 +25,125 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #ffffff;
-    border: 2px solid var(--text-muted);
-    border-radius: 4px;
+    height: 28px;
+    width: 28px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 
+        3px 3px 6px rgba(163, 177, 198, 0.2), 
+        -3px -3px 6px rgba(255, 255, 255, 0.8),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.5);
     transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.checkbox-container:hover input ~ .checkmark { border-color: var(--primary); }
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
 
 .checkbox-container input:checked ~ .checkmark {
     background-color: var(--success);
     border-color: var(--success);
+    box-shadow: 
+        0 0 10px rgba(22, 163, 74, 0.35),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
 }
 
-.checkmark::after { content: ""; position: absolute; display: none; }
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 
-.checkbox-container input:checked ~ .checkmark::after { display: block; }
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
 
 .checkbox-container .checkmark::after {
-    left: 6px;
-    top: 2px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #64748b;
+    border-width: 0 2.5px 2.5px 0;
     transform: rotate(45deg);
+    transition: var(--transition-smooth);
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    border-color: #ffffff;
 }
 
 /* Category tag */
 .video-tag {
     font-size: 0.65rem;
     font-weight: 700;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    background: rgba(37, 99, 235, 0.08);
+    letter-spacing: 0.03em;
+    background: rgba(37, 99, 235, 0.06);
     color: var(--primary);
     border: 1px solid rgba(37, 99, 235, 0.15);
+    box-shadow: 
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        1px 1px 3px rgba(37, 99, 235, 0.02);
     max-width: 90px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: var(--transition-smooth);
+}
+
+.video-tag:hover {
+    background: rgba(37, 99, 235, 0.12);
+    transform: translateY(-1px);
 }
 
 /* External link icon */
 .link-icon {
-    color: var(--text-muted);
-    transition: var(--transition-smooth);
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
+    cursor: pointer;
+    box-shadow: 
+        1px 2px 4px rgba(0, 0, 0, 0.02),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+    transition: var(--transition-smooth);
 }
 
-.link-icon:hover { color: var(--primary); }
+.link-icon:hover {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.15);
+}
 
 /* LeetCode badge */
 .leetcode-tag {
     font-size: 0.65rem;
     font-weight: 700;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    background: rgba(234, 88, 12, 0.08);
+    letter-spacing: 0.03em;
+    background: rgba(234, 88, 12, 0.06);
     color: var(--accent);
     border: 1px solid rgba(234, 88, 12, 0.15);
+    box-shadow: 
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        1px 1px 3px rgba(234, 88, 12, 0.02);
     white-space: nowrap;
     text-decoration: none;
     display: inline-block;
@@ -103,6 +155,7 @@
     background: var(--accent);
     color: #ffffff;
     transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.25);
 }
 
 /* LeetCode solved check button */
@@ -110,35 +163,42 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 1.5px solid rgba(234, 88, 12, 0.35);
-    background: transparent;
-    color: rgba(234, 88, 12, 0.45);
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 1px solid rgba(234, 88, 12, 0.25);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--accent);
     cursor: pointer;
     padding: 0;
     flex-shrink: 0;
-    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
-    margin-left: -2px;
+    box-shadow: 
+        1px 2px 4px rgba(0, 0, 0, 0.02),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+    transition: var(--transition-smooth);
 }
 
 .lc-check-btn:hover {
     background: rgba(234, 88, 12, 0.12);
     border-color: var(--accent);
     color: var(--accent);
-    transform: scale(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(234, 88, 12, 0.15);
 }
 
 .lc-check-btn.lc-solved {
     background: var(--accent);
     border-color: var(--accent);
     color: #ffffff;
+    box-shadow: 
+        0 4px 10px rgba(234, 88, 12, 0.25),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .lc-check-btn.lc-solved:hover {
-    background: rgba(234, 88, 12, 0.75);
-    transform: scale(1.1);
+    background: rgba(234, 88, 12, 0.85);
+    box-shadow: 0 6px 12px rgba(234, 88, 12, 0.35);
+    transform: translateY(-1.5px);
 }
 
 /* ============================================================
@@ -273,12 +333,31 @@
 .completed-time-container {
     font-size: 0.72rem;
     color: var(--text-muted);
-    background: rgba(0, 0, 0, 0.04);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    margin-top: 0.45rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    margin-top: 0.4rem;
+    width: 100%;
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.02),
+        inset -1px -1px 3px rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 550;
+    animation: fadeIn 0.3s ease;
+}
+
+.completed-time-container::before {
+    content: "";
     display: inline-block;
-    font-weight: 500;
+    width: 12px;
+    height: 12px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
 }
 
 .heatmap-section {
