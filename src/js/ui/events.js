@@ -4,7 +4,7 @@ import { toggleView } from './tabs.js';
 import { updateProgress } from './progress.js';
 
 const searchInput  = document.getElementById('search-input');
-const statusFilter = document.getElementById('status-filter');
+const customSelect = document.getElementById('custom-status-filter');
 const btnReset     = document.getElementById('btn-reset-progress');
 const btnChecklist = document.getElementById('view-tab-checklist');
 const btnHeatmap   = document.getElementById('view-tab-heatmap');
@@ -16,10 +16,39 @@ if (searchInput) {
     });
 }
 
-if (statusFilter) {
-    statusFilter.addEventListener('change', e => {
-        setStatusFilter(e.target.value);
-        renderVideos();
+if (customSelect) {
+    const selectTrigger = document.getElementById('custom-select-trigger');
+    
+    // Toggle dropdown visibility
+    selectTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        customSelect.classList.toggle('open');
+        const isOpen = customSelect.classList.contains('open');
+        selectTrigger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close dropdown on click outside
+    document.addEventListener('click', () => {
+        customSelect.classList.remove('open');
+        selectTrigger.setAttribute('aria-expanded', 'false');
+    });
+
+    // Handle option selections
+    const options = customSelect.querySelectorAll('.custom-option');
+    options.forEach(opt => {
+        opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            options.forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            
+            selectTrigger.querySelector('span').textContent = opt.textContent;
+            customSelect.classList.remove('open');
+            selectTrigger.setAttribute('aria-expanded', 'false');
+            
+            setStatusFilter(opt.getAttribute('data-value'));
+            renderVideos();
+        });
     });
 }
 
