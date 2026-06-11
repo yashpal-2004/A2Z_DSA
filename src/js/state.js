@@ -16,10 +16,14 @@ export function setSearchQuery(q)      { searchQuery = q; }
 
 // Load progress from Firestore on app start
 export async function loadProgress() {
-    const data = await fetchUserProgress(userId);
-    if (data) {
-        completedMap = data.completed || {};
-        lcSolvedMap  = data.lcSolved  || {};
+    try {
+        const data = await fetchUserProgress(userId);
+        if (data) {
+            completedMap = data.completed || {};
+            lcSolvedMap  = data.lcSolved  || {};
+        }
+    } catch (err) {
+        console.warn('Firebase load failed — running with empty state.', err);
     }
 }
 
