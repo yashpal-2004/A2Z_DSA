@@ -1,4 +1,4 @@
-import { Chart } from 'https://esm.sh/frappe-charts';
+import { Chart } from 'https://cdn.jsdelivr.net/npm/frappe-charts@1.6.2/dist/frappe-charts.min.esm.js';
 import { completedMap } from '../state.js';
 
 let chartInstance = null;
