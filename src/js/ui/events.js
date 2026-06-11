@@ -71,3 +71,37 @@ if (btnHeatmap) {
         toggleView('heatmap');
     });
 }
+
+// Video Modal Close events
+const modalClose = document.getElementById('video-modal-close');
+const modalBackdrop = document.getElementById('video-modal-backdrop');
+
+if (modalClose) {
+    modalClose.addEventListener('click', () => {
+        const iframe = document.getElementById('video-iframe');
+        const modal = document.getElementById('video-modal');
+        if (modal && iframe) {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                if (exitFS) exitFS.call(document);
+            }
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+    });
+}
+
+if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', () => {
+        const iframe = document.getElementById('video-iframe');
+        const modal = document.getElementById('video-modal');
+        if (modal && iframe) {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                if (exitFS) exitFS.call(document);
+            }
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+    });
+}

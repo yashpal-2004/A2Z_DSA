@@ -161,6 +161,20 @@
         </div>
     </div>
 
+    <!-- Video Modal Overlay -->
+    <div class="video-modal" id="video-modal" style="display: none;">
+        <div class="video-modal-backdrop" id="video-modal-backdrop"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="video-modal-close" aria-label="Close video player">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="video-iframe-container">
+                <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <h3 class="video-modal-title" id="video-modal-title">Video Title</h3>
+        </div>
+    </div>
+
     <!-- Application entry point -->
     <script type="module" src="src/js/main.js"></script>
 </body>

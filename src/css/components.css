@@ -643,5 +643,156 @@
         inset 1px 1px 1px rgba(255, 255, 255, 0.3);
 }
 
+/* ============================================================
+   VIDEO MODAL (PREMIUM GLASSMORPHIC OVERLAY)
+   ============================================================ */
 
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
 
+.video-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    animation: modalBackdropFadeIn 0.3s ease forwards;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px) saturate(190%);
+    -webkit-backdrop-filter: blur(20px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 
+        0 20px 50px rgba(15, 23, 42, 0.15),
+        inset 1px 1px 0px rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1001;
+    transform: scale(0.95);
+    opacity: 0;
+    animation: modalContentScaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -1.25rem;
+    right: -1.25rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 8px 24px rgba(15, 23, 42, 0.12),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+    transition: var(--transition-smooth);
+    z-index: 1002;
+}
+
+.video-modal-close:hover {
+    background: var(--danger);
+    color: #ffffff;
+    border-color: var(--danger);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+}
+
+.video-modal-close:active {
+    transform: scale(0.95) rotate(90deg);
+}
+
+.video-iframe-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.video-iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.25rem;
+}
+
+/* Animations */
+@keyframes modalBackdropFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalContentScaleIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjust */
+@media (max-width: 640px) {
+    .video-modal {
+        padding: 1rem;
+    }
+    
+    .video-modal-content {
+        padding: 1rem;
+        padding-top: 2.5rem;
+        border-radius: 20px;
+    }
+    
+    .video-modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 32px;
+        height: 32px;
+    }
+    
+    .video-modal-title {
+        font-size: 1rem;
+        margin-top: 0;
+    }
+}

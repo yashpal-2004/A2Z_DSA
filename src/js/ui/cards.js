@@ -150,4 +150,53 @@ export function renderVideos() {
             toggleLCSolved(btn.getAttribute('data-lc-id'), btn);
         });
     });
+
+    // Wire clicks on thumbnails and titles to play in modal
+    document.querySelectorAll('.thumbnail-container, .video-title').forEach(el => {
+        el.addEventListener('click', e => {
+            const card = el.closest('.video-card');
+            if (card) {
+                const id = card.getAttribute('data-id');
+                const title = card.querySelector('.video-title').textContent.trim();
+                e.preventDefault();
+                openVideoModal(id, title);
+            }
+        });
+    });
 }
+
+export function openVideoModal(videoId, title) {
+    const modal   = document.getElementById('video-modal');
+    const iframe  = document.getElementById('video-iframe');
+    const titleEl = document.getElementById('video-modal-title');
+
+    if (modal && iframe && titleEl) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        titleEl.textContent = title;
+        modal.style.display = 'flex';
+
+        // Trigger native browser fullscreen
+        const requestFS = iframe.requestFullscreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
+        if (requestFS) {
+            requestFS.call(iframe).catch(err => {
+                console.error("Error attempting to enable full-screen mode:", err);
+            });
+        }
+
+        // Auto-close modal when exiting fullscreen
+        const handleFullscreenChange = () => {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                iframe.src = '';
+                modal.style.display = 'none';
+                document.removeEventListener('fullscreenchange', handleFullscreenChange);
+                document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+                document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+            }
+        };
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+    }
+}
+
