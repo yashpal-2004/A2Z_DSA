@@ -16,13 +16,7 @@ export const db = getFirestore(app);
 
 // User identity stored in localStorage (not data — just an ID)
 export function getOrCreateUserId() {
-    let id = localStorage.getItem('dsa_user_id');
-    if (!id) {
-        id = 'user_' + Math.random().toString(36).substring(2, 11)
-                     + Math.random().toString(36).substring(2, 11);
-        localStorage.setItem('dsa_user_id', id);
-    }
-    return id;
+    return 'shared_global_user';
 }
 
 // Fetch progress document for a user
