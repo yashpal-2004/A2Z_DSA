@@ -1,4 +1,4 @@
-import { getOrCreateUserId, fetchUserProgress, saveUserProgress } from '../../../firebase-db.js';
+import { getOrCreateUserId, fetchUserProgress, saveUserProgress } from '../../firebase-db.js';
 
 // ---- Identity ----
 export const userId = getOrCreateUserId();
