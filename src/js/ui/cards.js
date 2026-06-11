@@ -177,6 +177,14 @@ export function openVideoPage(videoId, title) {
         mainContainer.style.display = 'none';
         videoPage.style.display = 'block';
         window.scrollTo(0, 0);
+
+        // Trigger native browser fullscreen on the iframe
+        const requestFS = iframe.requestFullscreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
+        if (requestFS) {
+            requestFS.call(iframe).catch(err => {
+                console.error("Error attempting to enable full-screen mode:", err);
+            });
+        }
     }
 }
 

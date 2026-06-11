@@ -82,6 +82,10 @@ if (videoPageBack) {
         const iframe        = document.getElementById('video-page-iframe');
         
         if (mainContainer && videoPage && iframe) {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                if (exitFS) exitFS.call(document);
+            }
             iframe.src = '';
             videoPage.style.display = 'none';
             mainContainer.style.display = 'block';
