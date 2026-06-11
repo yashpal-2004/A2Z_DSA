@@ -108,6 +108,12 @@ export function renderVideos() {
                     <span class="checkmark"></span>
                 </label>
             </div>
+            <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+                <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.title}" class="video-thumbnail" loading="lazy">
+                <div class="play-overlay">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+            </a>
             <div class="card-body">
                 <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer" class="video-title">
                     ${v.title}
