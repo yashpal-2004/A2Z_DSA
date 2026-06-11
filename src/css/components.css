@@ -374,6 +374,12 @@
     grid-template-columns: 2.8fr 1.2fr;
     gap: 2rem;
     align-items: start;
+    max-width: 100%;
+}
+
+.main-content-area {
+    min-width: 0;
+    max-width: 100%;
 }
 
 @media (max-width: 1024px) {
